@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\RequestProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +21,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('products', ProductController::class);
+Route::group(['middleware' => ['admin']], function () {
+    Route::resource('products', ProductController::class);
+});
+
+// Route::group(['middleware' => ['member']], function () {
+//     Route::resource('products', RequestProductController::class);
+// });

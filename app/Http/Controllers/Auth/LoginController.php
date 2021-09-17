@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+
 
 class LoginController extends Controller
 {
@@ -35,6 +37,12 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        if (Auth::check() && Auth::user()->role->id == 2) {
+            $this->redirectTo = route('product.index');
+        } elseif (Auth::check() && Auth::user()->role->id == 1) {
+            $this->redirectTo = route('member.index');
+        }
+
         $this->middleware('guest')->except('logout');
     }
 }

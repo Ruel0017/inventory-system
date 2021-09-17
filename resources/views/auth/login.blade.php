@@ -30,7 +30,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="mb-1">{{ __('Password') }}</label>
+                                <label for="password" class="mb-0">{{ __('Password') }}</label>
 
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password" required
@@ -45,27 +45,19 @@
                             </div>
 
                             <div class="form-group row ">
-                                <div class="col-md-5 offset-md-auto mb-1">
-                                    <div class="form-check ">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                            {{ old('remember') ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="remember">
-                                            {{ __('Remember Me') }}
-                                        </label>
-                                    </div>
+
+                                <div class="row mb-3 px-3">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Login') }}
+                                    </button>
                                 </div>
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link " href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
                             </div>
-                            <div class="row mb-3 px-3">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-                            </div>
-                            <div class="row mb-4 px-3">
+                            <div class="row mb-1 px-1">
                                 <small class="font-weight-bold">Don't have an account?
                                     <a class="text-danger" href="{{ route('register') }}">{{ __('Register') }}
                                     </a>

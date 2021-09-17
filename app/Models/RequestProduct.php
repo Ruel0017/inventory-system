@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class RequestProduct extends Model
 {
     use HasFactory;
+
     protected $primaryKey = 'id';
 
 
     protected $fillable = [
-        'name', 'detail', 'qty'
+        'user_id', 'quantity', 'product_id', 'remarks'
     ];
-
-    public function RequestProduct()
-    {
-        return $this->belongsTo('App/RequestProduct', 'user_id', 'id');
-    }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\RequestProduct;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class RequestProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class ProductController extends Controller
     }
     public function index()
     {
-        $products = Product::latest()->paginate(5);
+        $products = RequestProduct::latest()->paginate(5);
 
-        return view('products.index', compact('products'))
+        return view('members.index', compact('products'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -31,7 +31,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        return view('members.create');
     }
 
     /**
@@ -48,44 +48,43 @@ class ProductController extends Controller
             'qty' => 'required',
         ]);
 
-        Product::create($request->all());
+        RequestProduct::create($request->all());
 
-        return redirect()->route('products.index')
+        return redirect()->route('members.index')
             ->with('success', 'Product created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\RequestProduct  $requestProduct
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(RequestProduct $requestProduct)
     {
-        return view('products.show', compact('product'));
+        return view('members.show', compact('product'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\RequestProduct  $requestProduct
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(RequestProduct $requestProduct)
     {
-        return view('products.edit', compact('product'));
+        return view('members.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\RequestProduct  $requestProduct
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, RequestProduct $requestProduct)
     {
-
         $request->validate([
             'name' => 'required',
             'detail' => 'required',
@@ -94,23 +93,23 @@ class ProductController extends Controller
 
         //dd($request->{'qty'}); -> get ng qty
 
-        $product->update($request->all());
+        $requestProduct->update($request->all());
 
-        return redirect()->route('products.index')
+        return redirect()->route('members.index')
             ->with('success', 'Product updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\RequestProduct  $requestProduct
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(RequestProduct $requestProduct)
     {
-        $product->delete();
+        $requestProduct->delete();
 
-        return redirect()->route('products.index')
+        return redirect()->route('members.index')
             ->with('success', 'Product deleted successfully');
     }
 }
